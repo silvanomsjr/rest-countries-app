@@ -21,7 +21,6 @@ function InputGroupHome ({ setActualFilter, setSearchParams, actualFilter }: IPr
     if(value === ''){
       setSearchParams('')
     }
-    console.log(e)
   }
 
   const handleOnChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -49,8 +48,6 @@ function InputGroupHome ({ setActualFilter, setSearchParams, actualFilter }: IPr
       setSearchParams(searchValue)
     }
   }
-
-  console.log(actualFilter)
 
   return(
     <Box

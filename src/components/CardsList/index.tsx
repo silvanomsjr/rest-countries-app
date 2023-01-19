@@ -97,8 +97,6 @@ function CardList( { actualFilter, searchParams, setActualFilter }: ICardListPro
     }
   }, [searchParams])
 
-  console.log(showingData)
-
   async function getData() {
     const info = await fetch('https://restcountries.com/v2/all').then(e => e.json())
     setRealData(info)

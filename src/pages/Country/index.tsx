@@ -55,7 +55,6 @@ const Country = () => {
     }
   }, [pathToName])
 
-  console.log('OtherData: ', otherData)
 
 
 
