@@ -41,7 +41,7 @@ function EachCard({data}: DataCardInfo){
 
 
   return(
-    <Link to={`/country/${name}`}>
+    <Link to={`/country/${name.toLowerCase()}`}>
       <Card
         minWidth= {{ base: 'none', cardBreak: '360px' }}
         maxWidth='360px'
@@ -69,7 +69,7 @@ function EachCard({data}: DataCardInfo){
             <b>Region:</b> {region}
           </Text>
           <Text marginBottom='.3rem'>
-            <b>Capital:</b> {capital}
+            <b>Capital:</b> {!capital ? '?' : capital}
           </Text>
         </CardBody>
       </Card>
@@ -117,6 +117,7 @@ function CardList( { actualFilter, searchParams, setActualFilter }: ICardListPro
     }
   }, [actualFilter])
 
+  console.log(showingData)
 
   return(
     <Container
@@ -150,10 +151,13 @@ function CardList( { actualFilter, searchParams, setActualFilter }: ICardListPro
         />
       )
       :
-      (
-        showingData.map((element:CardInfo) => {
-          return(<EachCard key={element.nativeName} data={element} />)
-        })
+      (showingData.length !== 0
+        ?
+          (showingData.map((element:CardInfo) => {
+            return(<EachCard key={element.nativeName} data={element} />)
+          }))
+        :
+        <Text>Sorry, we don't found any country with that name.</Text>
       )
       }
       </Flex>

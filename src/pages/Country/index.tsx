@@ -56,6 +56,7 @@ const Country = () => {
   }, [pathToName])
 
 
+  console.log(data)
 
 
   return(
@@ -198,19 +199,20 @@ const Country = () => {
                   </Flex>
                 </Flex>
 
-
-
-
-
               </Box>
             )
-            : undefined
+            : data === undefined
+              ? (
+              <Box w='100%' display='flex' justifyContent='center' alignItems='center'>
+                <Text>Sorry, we don't found that country.</Text>
+              </Box>
+              )
+              : undefined
             }
 
           </Box>
         )
         }
-
       </Container>
   )
 }
