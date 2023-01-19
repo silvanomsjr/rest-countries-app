@@ -3,11 +3,73 @@ import { Box, Button, Image, Container, Spinner, Flex, Text, Heading, useColorMo
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
+
+interface IOtherData {
+  name: String
+  numericCode: number
+}
+
+interface INativeName {
+  [key:string]: {
+    common: String
+    official: String
+  }
+}
+interface ICountryData {
+  altSpellings: String[]
+  area: number
+  borders: String[]
+  capital: String[]
+  capitalInfo: Object
+  car: Object
+  cca2: String
+  cca3: String
+  ccn3: String
+  cioc: String
+  coatOfArms: {
+    png: String
+    svg: String
+  }
+  continents: String[]
+  currencies: {
+    [key:string]: {
+      name: String
+      symbol: String
+    }
+  }
+  demonyms: Object
+  fifa: String
+  flag: String
+  flags: {
+    png: String
+    svg: string
+  }
+  idd: Object
+  landlocked: Boolean
+  languages: Object
+  latlng: Number[]
+  maps: Object
+  name:{
+    common: String
+    nativeName: INativeName
+    official: String
+  }
+  population: Number
+  region: String
+  startOfWeek: String
+  status: String
+  subregion: String
+  timezones: String
+  tld: String[]
+  translations: Object
+  unMember: Boolean
+}
+
 const Country = () => {
   const getParams = useParams()
   const [ loading, setLoading ] = useState(true)
-  const [ data, setData ] = useState({})
-  const [ check, setCheck ] = useState([])
+  const [ data, setData ] = useState<ICountryData>()
+  const [ check, setCheck ] = useState("")
   const [ otherData, setOtherData ] = useState([])
 
   const cardColor = useColorModeValue('darkModeText', 'darkModeElements');
@@ -43,7 +105,6 @@ const Country = () => {
     setLoading(false)
   }, [data])
 
-
   const pathToName = data?.name?.nativeName
   const tld = data?.tld
   const capital = data?.capital
@@ -51,13 +112,12 @@ const Country = () => {
 
   useEffect(() => {
     if(pathToName){
-      setCheck(Object.keys(data?.name?.nativeName))
+      const keys = Object.keys(data?.name?.nativeName)
+      setCheck(keys[keys.length-1])
     }
   }, [pathToName])
 
-
-  console.log(data)
-
+  console.log(otherData)
 
   return(
       <Container display='flex' justifyContent='center' alignItems='center' marginTop='2.5rem' fontWeight='bold' w='100%' maxW='1800px'>
@@ -120,7 +180,7 @@ const Country = () => {
                       <Flex flexDirection='column' gap='.5rem' fontWeight='normal'>
                         <Text fontSize='md'><b>Native Name:</b> {' '}
                           {pathToName &&
-                          pathToName[check[check.length-1]]?.common
+                          pathToName[check]?.common
                           }
                         </Text>
                         <Text><b>Population:</b>
@@ -171,10 +231,10 @@ const Country = () => {
                       {otherData.length >= 1 && loading === false
                       ?(
                         <>
-                          {otherData.map(element => {
+                          {otherData.map((element:IOtherData)=> {
                             return(
                               <Box
-                                key={element?.name}
+                                key={element?.numericCode}
                                 padding='.2rem 1.5rem'
                                 backgroundColor={cardColor}
                                 borderRadius='2px'
