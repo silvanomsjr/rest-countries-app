@@ -83,7 +83,7 @@ const Country = () => {
       setData(json[0])
     })
     .catch(error => {
-      console.log('Error', error)
+      console.log('Error: ', error)
     })
     .finally(() =>
       setLoading(false)
@@ -117,10 +117,8 @@ const Country = () => {
     }
   }, [pathToName])
 
-  console.log(otherData)
-
   return(
-      <Container display='flex' justifyContent='center' alignItems='center' marginTop='2.5rem' fontWeight='bold' w='100%' maxW='1800px'>
+      <Container display='flex' justifyContent='center' alignItems='center' margin='2.5rem 0' fontWeight='bold' w='100%' maxW='1800px'>
         {loading
         ?
           <Spinner

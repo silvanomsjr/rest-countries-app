@@ -117,7 +117,6 @@ function CardList( { actualFilter, searchParams, setActualFilter }: ICardListPro
     }
   }, [actualFilter])
 
-  console.log(showingData)
 
   return(
     <Container
